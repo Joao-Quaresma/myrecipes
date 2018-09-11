@@ -1,6 +1,6 @@
-class ApplicationController < ActionController::Base
+class RecipesController < ApplicationController
   def index
-
+    @recipes = Recipe.all.order("created_at DESC")
   end
 
   def create
@@ -22,5 +22,4 @@ class ApplicationController < ActionController::Base
   def destroy
 
   end
-
 end
