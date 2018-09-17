@@ -3,23 +3,30 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all.order("created_at DESC")
   end
 
-  def create
 
+  def show
+    @chef = Chef.first
+    @recipe = Recipe.find(params[:id])
   end
 
   def new
-
+    @recipe = Recipe.new
   end
 
-  def update
-
+  def create
+    @recipe = Recipe.new(recipe_params)
+    @recipe.chef = Chef.first
+    if @recipe.save
+      flash[:success] = "Recipe was creaed successfully!"
+      redirect_to recipe_path(@recipe)
+    else
+      render 'new'
+    end
   end
 
-  def edit
+  private
 
-  end
-
-  def destroy
-
+  def recipe_params
+    params.require(:recipe).permit(:name, :description)
   end
 end
