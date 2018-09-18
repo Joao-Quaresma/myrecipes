@@ -13,6 +13,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
+gem 'bootstrap-sass-extras', '~> 0.0.7'
+gem 'jquery-turbolinks'
+gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+
 
 group :development, :test do
   gem 'sqlite3'
