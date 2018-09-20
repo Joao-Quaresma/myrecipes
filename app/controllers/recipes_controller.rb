@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[show destroy edit update]
+  
   def index
-    @recipes = Recipe.all.order("created_at DESC")
+    @recipes = Recipe.paginate(page: params[:page], per_page:10).order("updated_at DESC")
   end
 
 

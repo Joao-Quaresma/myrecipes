@@ -4,7 +4,13 @@
     <title></title>
   </head>
   <body>
-  	<%= render 'shared/page_title', title:"Showing all Recipes" %>
+    <%= render 'shared/page_title', title:"Showing all Recipes" %>
+    <div class="center">
+      <%= will_paginate %>
+    </div>
     <%= render 'recipe', obj: @recipes %>
+    <div class="center">
+      <%= will_paginate %>
+    </div>
   </body>
 </html>
