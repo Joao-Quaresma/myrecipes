@@ -9,6 +9,8 @@ class Chef < ApplicationRecord
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
+  #when signing up has_secure_password will enforce a password
   has_secure_password
-  validates :password, presence: true, length: { minimum: 5 }
+  #when editing  allow_nil: true will allow us to not update the password
+  validates :password, presence: true, length: { minimum: 5 }, allow_nil: true
 end
