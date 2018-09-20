@@ -4,6 +4,15 @@
     <title></title>
   </head>
   <body>
-    <%= render 'shared/page_title', title: "Your Profile" %>
+    <%= render 'shared/page_title', title: "#{@chef.chefname}'s Profile" %>
+    <div class="row">
+      <div class="col-md-4">
+        <section class="chef_info center">
+          <%= gravatar_for(@chef, size: 150) %>
+        </section>
+      </div>
+    </div>
+    <h4 class="align-center"><%= @chef.chefname %>'s recipes</h4>
+    <%= render 'recipes/recipe', obj: @chef.recipes %>
   </body>
 </html>
