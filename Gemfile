@@ -16,6 +16,7 @@ gem 'jquery-rails'
 gem 'bootstrap-sass-extras', '~> 0.0.7'
 gem 'jquery-turbolinks'
 gem 'jquery-ui-rails', '~> 6.0', '>= 6.0.1'
+gem 'bcrypt', '~> 3.1.7'
 
 
 group :development, :test do
