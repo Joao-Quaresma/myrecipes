@@ -1,4 +1,5 @@
 class ChefsController < ApplicationController
+  before_action :find_chef, only: %i[show edit update destroy]
   def new
     @chef = Chef.new
   end
@@ -14,16 +15,12 @@ class ChefsController < ApplicationController
   end
 
   def show
-    @chef = Chef.find(params[:id])
     @chef_recipes = @chef.recipes.paginate(page: params[:page], per_page: 5).order("updated_at ASC")
   end
 
-  def edit
-    @chef = Chef.find(params[:id])
-  end
+  def edit; end
 
   def update
-    @chef = Chef.find(params[:id])
     if @chef.update(chef_params)
       flash[:success] = "Profile updated!"
       redirect_to @chef
@@ -36,10 +33,19 @@ class ChefsController < ApplicationController
     @chefs = Chef.paginate(page: params[:page], per_page:10).order("chefname ASC")
   end
 
+  def destroy
+    @chef.destroy
+    flash[:danger] = "Chef and all associated recipes have been deleted!"
+    redirect_to chefs_path
+  end
 
   private
 
   def chef_params
     params.require(:chef).permit(:chefname, :email, :password, :password_confirmation)
+  end
+
+  def find_chef
+    @chef = Chef.find(params[:id])
   end
 end
