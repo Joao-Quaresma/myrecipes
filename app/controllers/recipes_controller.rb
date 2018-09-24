@@ -54,7 +54,7 @@ class RecipesController < ApplicationController
   end
 
   def require_same_chef
-    if @recipe.chef != current_chef
+    if @recipe.chef != current_chef && !current_chef.admin?
       flash[:danger] = "You can only edit or delete your own recipes!"
       redirect_to recipes_path
     end

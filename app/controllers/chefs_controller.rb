@@ -1,6 +1,7 @@
 class ChefsController < ApplicationController
   before_action :find_chef, only: %i[show edit update destroy]
   before_action :require_same_chef, only: %i[edit update destroy]
+  before_action :require_admin, only: [:destroy]
   def new
     @chef = Chef.new
   end
@@ -52,8 +53,24 @@ class ChefsController < ApplicationController
   end
 
   def require_same_chef
-    if @chef != current_chef
+    if @chef != current_chef && !current_chef.admin?
       flash[:danger] = "You can only edit or delete your own profile!"
+      redirect_to chefs_path
+    end
+  end
+
+  def require_admin
+    if current_chef != @chef && !current_chef.admin?
+      flash[:danger] = "Only Admin users can perform that action!"
+      redirect_to chefs_path
+    elsif current_chef == @chef
+      session[:chef_id] = nil
+      @chef.destroy
+      flash[:success] = "Chef Deleted"
+      redirect_to chefs_path
+    elsif current_chef != @chef && current_chef.admin?
+      @chef.destroy
+      flash[:success] = "Chef Deleted"
       redirect_to chefs_path
     end
   end
