@@ -1,26 +1,20 @@
 class ApplicationController < ActionController::Base
-  def index
+  helper_method :current_chef, :logged_in?
 
+  def current_chef
+    @current_chef ||= Chef.find(session[:chef_id]) if session[:chef_id]
   end
 
-  def create
-
+  def logged_in?
+    !!current_chef
   end
 
-  def new
+  def require_chef
+    if !logged_in?
+      flash[:danger] = "You must logged in to perform that action"
+      redirect_to root_path
 
-  end
-
-  def update
-
-  end
-
-  def edit
-
-  end
-
-  def destroy
-
+    end
   end
 
 end

@@ -1,5 +1,6 @@
 class ChefsController < ApplicationController
   before_action :find_chef, only: %i[show edit update destroy]
+  before_action :require_same_chef, only: %i[edit update destroy]
   def new
     @chef = Chef.new
   end
@@ -7,6 +8,7 @@ class ChefsController < ApplicationController
   def create
     @chef = Chef.new(chef_params)
     if @chef.save
+      session[:chef_id] = @chef.id
       flash[:success] = "Welcome #{@chef.chefname} to MyRecipes App!"
       redirect_to chef_path(@chef)
     else
@@ -47,5 +49,12 @@ class ChefsController < ApplicationController
 
   def find_chef
     @chef = Chef.find(params[:id])
+  end
+
+  def require_same_chef
+    if @chef != current_chef
+      flash[:danger] = "You can only edit or delete your own profile!"
+      redirect_to chefs_path
+    end
   end
 end

@@ -22,6 +22,7 @@ class RecipesTest < ActionDispatch::IntegrationTest
   end
 
   test "should get recipe show" do
+    sign_in_as(@chef, "password")
     get recipe_path(@recipe)
     assert_template 'recipes/show'
     assert_match @recipe.name, response.body
@@ -33,12 +34,13 @@ class RecipesTest < ActionDispatch::IntegrationTest
   end
 
   test "create new valid recipe" do
+    sign_in_as(@chef, "password")
     get new_recipe_path
     assert_template 'recipes/new'
     name_of_recipe = "chicken salte"
     description_of_recipe = "add chicken, add vegetables"
     assert_difference 'Recipe.count', 1 do
-      post recipes_path, params: { recipe: { name: name_of_recipe, description: description_of_recipe }}
+      post recipes_path, params: { recipe: { name: name_of_recipe, description: description_of_recipe } }
     end
     follow_redirect!
     assert_match name_of_recipe.capitalize, response.body
@@ -46,6 +48,7 @@ class RecipesTest < ActionDispatch::IntegrationTest
   end
 
   test "reject invalid recipe submissions" do
+    sign_in_as(@chef, "password")
     get new_recipe_path
     assert_template 'recipes/new'
     assert_no_difference "Recipe.count" do

@@ -16,6 +16,8 @@ class ChefsIndexTest < ActionDispatch::IntegrationTest
   end
 
   test "should delete chef" do
+    sign_in_as(@chef1, "password")
+    sign_in_as(@chef2, "password")
     get chefs_path
     assert_template 'chefs/index'
     assert_difference 'Chef.count', -1 do
@@ -24,5 +26,4 @@ class ChefsIndexTest < ActionDispatch::IntegrationTest
     assert_redirected_to chefs_path
     assert_not flash.empty?
   end
-
 end
