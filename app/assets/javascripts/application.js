@@ -12,11 +12,11 @@
 //
 //= require jquery
 //= require rails-ujs
-if Rails.env.production?
+<% if Rails.env.production? %>
 	//= require bootstrap-sprockets
-else
+<% else %>
 	//= require bootstrap
-end
+<% end %>
 //= require turbolinks
 //= require jquery.turbolinks
 //= require activestorage
