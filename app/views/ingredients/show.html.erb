@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <%= render 'shared/page_title', title: "#{@ingredient.name}'s Recipes" %>
+    <div class="center">
+      <% if logged_in? && current_chef.admin? %>
+        <li><%= link_to "Edit Ingredient", edit_ingredient_path(@ingredient) %></li>
+      <% end %>
+    </div>
+    <% if @ingredient.recipes.count != 0 %>
+      <h4 align="center">Recipe's containing <%= @ingredient.name %></h4>
+      <div class="center">
+        <%= will_paginate @ingredient_recipes %>
+      </div>
+      <%= render 'recipes/recipe', obj: @ingredient_recipes %>
+      <div class="center">
+        <%= will_paginate @ingredient_recipes %>
+      </div>
+    <% else %>
+      <h4 align="center">No Recipes yet!</h4>
+    <% end %>
+  </body>
+</html>
