@@ -30,7 +30,7 @@ class RecipesController < ApplicationController
   def edit;end
 
   def destroy
-    @recipe.delete
+    @recipe.destroy
     flash[:danger] = "Recipe successfully deleted!"
     redirect_to recipes_path
   end
