@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+  <body>
+    <div align="center">
+      <%= will_paginate comments %>
+    </div>
+    <% comments.each do |comment| %>
+      <%= render(partial: 'comments/comment', object: comment) %>
+    <% end %>
+    <div align="center">
+      <%= will_paginate comments %>
+    </div>
+  </body>
+</html>
