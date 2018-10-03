@@ -12,9 +12,11 @@
 //
 //= require jquery
 //= require rails-ujs
-//= require bootstrap
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require jquery.turbolinks
 //= require activestorage
 //= require_tree .
+
+
+// remove //= require bootstrap when deploying to prod to make it work in heroku
