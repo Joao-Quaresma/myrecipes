@@ -20,3 +20,14 @@
 
 
 // remove //= require bootstrap when deploying to prod to make it work in heroku
+
+
+function scrollToBottom(){
+  if($('#messages').length > 0) {
+    $('#messages').scrollTop($('#messages')[0].scrollHeight);
+  }
+}
+
+$(document).ready(function() {
+  scrollToBottom();
+});
