@@ -20,6 +20,9 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'will_paginate', '~> 3.1.0'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'bootstrap'
+gem 'carrierwave', '0.11.2'
+gem 'mini_magick'
+gem 'fog'
 
 group :development, :test do
   gem 'sqlite3'
